@@ -15,8 +15,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth focus:scroll-auto">
       <body
-        className={`${geistSans.variable} antialiased`}
-      >
+        className={`${geistSans.variable} antialiased` }
+        suppressHydrationWarning>
         {children}
       </body>
     </html>

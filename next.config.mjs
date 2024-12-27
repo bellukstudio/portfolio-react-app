@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: "via.placeholder.com", // Corrected: Removed protocol
         pathname: "/**", // Match all paths under this hostname
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com", // Corrected: Removed protocol
+        pathname: "/**", // Match all paths under this hostname
+      },
     ],
   },
 };
