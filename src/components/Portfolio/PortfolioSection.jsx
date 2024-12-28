@@ -2,7 +2,8 @@
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import PropTypes from "prop-types"; // Import PropTypes
 import DefaultLayout from "../Layout/DefaultLayout";
-
+import { useEffect, useState } from "react";
+import apiService from "@/core/response/apiResponse";
 // Define PortfolioCard component
 const PortfolioCard = ({ item }) => {
   return (
@@ -25,7 +26,7 @@ const PortfolioCard = ({ item }) => {
         <p className="text-gray-600 mb-4 dark:text-white">{item.description}</p>
         <div className="flex justify-between items-center">
           <a
-            href={item.demoLink}  
+            href={item.demoLink}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
@@ -61,60 +62,61 @@ PortfolioCard.propTypes = {
 };
 
 export default function PortfolioSection() {
-  const portfolioItems = [
-    {
-      id: 1,
-      title: "E-Commerce Platform",
-      description:
-        "A full-featured online shopping platform built with React and Node.js.",
-      image: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f",
-      demoLink: "https://demo.example.com",
-      sourceLink: "https://github.com/example",
-    },
-    {
-      id: 2,
-      title: "Task Management App",
-      description:
-        "A productivity application for managing daily tasks and projects.",
-      image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8",
-      demoLink: "https://demo.example.com",
-      sourceLink: "https://github.com/example",
-    },
-    {
-      id: 3,
-      title: "Weather Dashboard",
-      description:
-        "Real-time weather monitoring dashboard with detailed forecasts.",
-      image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b",
-      demoLink: "https://demo.example.com",
-      sourceLink: "https://github.com/example",
-    },
-    {
-      id: 4,
-      title: "Social Media Analytics",
-      description: "Analytics dashboard for tracking social media performance.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
-      demoLink: "https://demo.example.com",
-      sourceLink: "https://github.com/example",
-    },
-    {
-      id: 5,
-      title: "Fitness Tracking App",
-      description: "Mobile application for tracking workouts and nutrition.",
-      image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438",
-      demoLink: "https://demo.example.com",
-      sourceLink: "https://github.com/example",
-    },
-    {
-      id: 6,
-      title: "Recipe Finder",
-      description: "AI-powered recipe recommendation engine.",
-      image: "https://images.unsplash.com/photo-1466637574441-749b8f19452f",
-      demoLink: "https://demo.example.com",
-      sourceLink: "https://github.com/example",
-    },
-  ];
+  const [portfolioItems, setPortfolioItems] = useState([]);
+  const [loadingPortfolio, setLoadingPortfolio] = useState(true);
 
+  const fetchPortfolio = async () => {
+    try {
+      setLoadingPortfolio(true);
+
+      const response = await apiService.get("/portfolio");
+      if (
+        response.meta.code !== 200 ||
+        !response.data.portfolio ||
+        response.data.portfolio.length === 0
+      ) {
+        setPortfolioItems([]);
+      } else {
+        setPortfolioItems(response.data.portfolio);
+      }
+    } catch (error) {
+    } finally {
+      setLoadingPortfolio(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
+  if (loadingPortfolio) {
+    return (
+      <div>
+        <DefaultLayout>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl hover:-translate-y-2 dark:bg-[#313131]">
+            {/* Skeleton for Image Section */}
+            <div className="relative h-48 overflow-hidden bg-gray-300 animate-pulse">
+              <div className="w-full h-full bg-gray-400 animate-pulse" />
+            </div>
+
+            {/* Skeleton for Content Section */}
+            <div className="p-6">
+              <div className="w-32 h-6 bg-gray-300 animate-pulse mb-2" />{" "}
+              {/* Skeleton for Title */}
+              <div className="w-full h-4 bg-gray-300 animate-pulse mb-4" />{" "}
+              {/* Skeleton for Description */}
+              <div className="flex justify-between items-center">
+                {/* Skeleton for Links */}
+                <div className="w-24 h-6 bg-gray-300 animate-pulse" />{" "}
+                {/* Skeleton for Live Demo Link */}
+                <div className="w-24 h-6 bg-gray-300 animate-pulse" />{" "}
+                {/* Skeleton for Source Link */}
+              </div>
+            </div>
+          </div>
+        </DefaultLayout>
+      </div>
+    );
+  }
   return (
     <div>
       <DefaultLayout>
@@ -123,9 +125,15 @@ export default function PortfolioSection() {
             My Portfolio
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioItems.map((item) => (
-              <PortfolioCard key={item.id} item={item} />
-            ))}
+            {portfolioItems.length > 0 ? (
+              portfolioItems.map((item) => (
+                <PortfolioCard key={item.id} item={item} />
+              ))
+            ) : (
+              <div className="text-center place-self-center text-gray-500 dark:text-white ">
+                No portfolio items found.
+              </div>
+            )}
           </div>
         </div>
       </DefaultLayout>
