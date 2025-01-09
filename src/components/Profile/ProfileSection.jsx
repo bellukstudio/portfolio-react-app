@@ -218,7 +218,7 @@ export default function PortfolioSection() {
             </div>
           </div>
           {/* Mobile UI */}
-          <div className="md:hidden">
+          <div className="md:hidden flex flex-col">
             <Image
               className="w-full h-[100vh] left-0 top-[3px] absolute mt-[100px] object-cover"
               width={862}

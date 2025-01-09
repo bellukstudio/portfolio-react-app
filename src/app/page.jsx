@@ -18,7 +18,7 @@ export default function Home() {
       <section id="profile" className="h-[100vh] md:h-[70vh]">
         <ProfileSection />
       </section>
-      <section id="experience" className="mx-auto">
+      <section id="experience" className="mx-auto mt-[100px]">
         <ExperienceSection />
       </section>
     
