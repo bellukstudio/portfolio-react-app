@@ -27,14 +27,18 @@ export default function PortfolioSection() {
     try {
       setLoadingProfile(true);
       const response = await apiService.get("/myprofile/getSingle");
-  
+
       if (response.meta.code === 200) {
         setProfile(response.data.profile);
-  
+
         const educationResponse = await apiService.get("/education");
-  
+
         // Check if the response code is 200 and if 'education' data exists
-        if (educationResponse.meta.code !== 200 || !educationResponse.data.education || educationResponse.data.education.length === 0) {
+        if (
+          educationResponse.meta.code !== 200 ||
+          !educationResponse.data.education ||
+          educationResponse.data.education.length === 0
+        ) {
           setEducation([]);
         } else {
           setEducation(educationResponse.data.education);
@@ -46,7 +50,6 @@ export default function PortfolioSection() {
       setLoadingProfile(false);
     }
   };
-  
 
   useEffect(() => {
     fetchProfile();
@@ -142,7 +145,7 @@ export default function PortfolioSection() {
               width={862}
               height={613}
               alt="bg"
-              src={profile.background}
+              src={profile?.background || "https://via.placeholder.com/200x250"}
             />
             <div className="w-full h-full left-0 top-0 absolute bg-black/70"></div>
             <Image
@@ -150,7 +153,7 @@ export default function PortfolioSection() {
               width={222}
               alt="bg"
               height={258}
-              src={profile.photo}
+              src={profile?.photo || "https://via.placeholder.com/200x250"}
             />
             <div className="w-[358px] h-[174px] left-[315px] top-[117px] absolute">
               <div className="left-[1px] top-0 absolute text-center text-white text-xs  font-light font-['Montserrat']">
@@ -169,26 +172,26 @@ export default function PortfolioSection() {
                 AVAILABLE :{" "}
               </div>
               <div className="left-[132px] top-0 absolute text-center text-white text-xs font-light font-['Montserrat']">
-                {profile.fullname}
+                {profile?.fullname || ""}
               </div>
               <div className="left-[132px] top-[40px] absolute text-center text-white text-xs font-light font-['Montserrat']">
-                {profile.liveIn}
+                {profile?.liveIn || ""}
               </div>
               <div className="left-[132px] top-[80px] absolute text-center text-white text-xs font-light font-['Montserrat']">
-                {profile.degree}
+                {profile?.degree || ""}
               </div>
               <div className="left-[132px] top-[119px] absolute text-center text-white text-xs font-light font-['Montserrat']">
-                {calculateAge(profile.birthOfDay)}
+                {calculateAge(profile?.birthOfDay || "")}
               </div>
               <div className="left-[131px] top-[159px] absolute text-start text-white text-xs font-light font-['Montserrat']">
-                {profile.available}
+                {profile?.available || ""}
               </div>
             </div>
             <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
               <div className="w-full xl:w-1/2">
                 <div className="w-[500px] h-[72px] left-5 ml-10 top-[396px] absolute">
                   <div className="w-[350px] xl:w-[500px] h-[15px] left-0 top-[30px] absolute text-justify text-white text-xs font-light font-['Montserrat']">
-                    {profile.overview}
+                    {profile?.overview || ""}
                   </div>
                 </div>
               </div>
@@ -203,8 +206,9 @@ export default function PortfolioSection() {
                         className="w-[300px] h-[15px] left-0 absolute text-start text-white text-xs font-light font-['Montserrat']"
                         style={{ top: `${30 + index * 50}px` }} // Adjust the top value dynamically
                       >
-                        {edu.educationLevel} - {edu.fieldOfStudy} <br /> 
-                        {edu.institution} - {new Date(edu.startMonth).getFullYear()} -{" "}
+                        {edu.educationLevel} - {edu.fieldOfStudy} <br />
+                        {edu.institution} -{" "}
+                        {new Date(edu.startMonth).getFullYear()} -{" "}
                         {new Date(edu.finishMonth).getFullYear()}
                       </div>
                     </div>
@@ -220,7 +224,7 @@ export default function PortfolioSection() {
               width={862}
               height={613}
               alt="bg"
-              src={profile.background}
+              src={profile?.background || "https://via.placeholder.com/200x250"}
             />
             <div className="w-full h-full left-0 top-0 absolute bg-black/70 mt-[100px]"></div>
             <div className="flex flex-col">
@@ -229,7 +233,7 @@ export default function PortfolioSection() {
                 width={222}
                 alt="bg"
                 height={258}
-                src={profile.photo}
+                src={profile?.photo || "https://via.placeholder.com/200x250"}
               />
               <div className="w-[358px] h-[174px] place-self-center top-[170px] relative flex flex-col justify-between text-white text-xs font-light font-['Montserrat']">
                 {/* Full Name */}
@@ -238,7 +242,7 @@ export default function PortfolioSection() {
                     Full Name :
                   </span>
                   <span className="text-left w-[200px]">
-                    MUH. LUKMAN AKBAR PRIHANDOYO
+                    {profile?.fullname}
                   </span>
                 </div>
                 {/* Live In */}
@@ -247,7 +251,7 @@ export default function PortfolioSection() {
                     Live In :
                   </span>
                   <span className="text-left w-[200px]">
-                    SLAWI, TEGAL REGENCY
+                    {profile?.liveIn || ""}
                   </span>
                 </div>
                 {/* Degree */}
@@ -255,14 +259,19 @@ export default function PortfolioSection() {
                   <span className="text-right w-[100px] font-extrabold">
                     Degree :
                   </span>
-                  <span className="text-left w-[200px]">S1</span>
+                  <span className="text-left w-[200px]">
+                    {" "}
+                    {profile?.degree || ""}
+                  </span>
                 </div>
                 {/* Age */}
                 <div className="flex justify-between">
                   <span className="text-right w-[100px] font-extrabold">
                     Age :
                   </span>
-                  <span className="text-left w-[200px]">23</span>
+                  <span className="text-left w-[200px]">
+                    {calculateAge(profile?.birthOfDay || "")}
+                  </span>
                 </div>
                 {/* Availability */}
                 <div className="flex justify-between">
@@ -270,7 +279,7 @@ export default function PortfolioSection() {
                     AVAILABLE :
                   </span>
                   <span className="text-left w-[200px]">
-                    FREELANCE, CONTRACT, FULL TIME
+                    {profile?.available || ""}
                   </span>
                 </div>
               </div>
@@ -278,18 +287,19 @@ export default function PortfolioSection() {
                 <div className="top-0 relative text-center text-white text-xs font-extrabold font-['Montserrat'] place-self-center">
                   EDUCATION
                 </div>
-                <div className="top-0 mt-10 relative text-center text-white text-xs font-medium font-['Montserrat'] place-self-center">
-                  SMK NEGERI 1 SLAWI - 2016 - 2019
-                </div>
-                <div className="top-0 mt-5 relative text-center text-white text-xs font-medium font-['Montserrat'] place-self-center">
-                  SMK NEGERI 1 SLAWI - 2016 - 2019
-                </div>
+                {education.map((edu, index) => (
+                  <div key={edu.id} className="mt-10">
+                    <div className="top-0 mt-10 relative text-center text-white text-xs font-medium font-['Montserrat'] place-self-center">
+                      {edu.educationLevel} - {edu.fieldOfStudy} <br />
+                      {edu.institution} -{" "}
+                      {new Date(edu.startMonth).getFullYear()} -{" "}
+                      {new Date(edu.finishMonth).getFullYear()}
+                    </div>
+                  </div>
+                ))}
               </div>
               <div className="w-full h-[15px] left-0 top-[300px] relative text-justify text-white text-xs font-light font-['Montserrat']">
-                Magnam dolores commodi suscipit. Necessitatibus eius consequatur
-                ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam
-                quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
-                Quia fugiat sit in iste officiis commodi quidem hic quas
+                {profile?.overview || ""}
               </div>
             </div>
           </div>

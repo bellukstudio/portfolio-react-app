@@ -81,7 +81,7 @@ export default function HomeSection() {
               className="absolute left-[-10px] top-0 w-[200px] h-[250px] rounded-[20px] shadow-md object-cover"
               width={200}
               height={250}
-              src={profile.photo} // Use the fetched photo URL
+              src={profile?.photo || "https://via.placeholder.com/200x250"}
               alt="Profile"
             />
 
@@ -92,11 +92,11 @@ export default function HomeSection() {
             <div className="absolute top-[63px] left-[210px] flex items-center space-x-2">
               <FaGithub />
               <a
-                href={profile.urlGithub}
+                href={profile?.urlGithub || ''}
                 className="text-black text-[10px] font-medium dark:text-white"
                 target="_blank"
               >
-                {profile.githubName} {/* Display the GitHub name */}
+                {profile?.githubName || ''} {/* Display the GitHub name */}
               </a>
             </div>
 
@@ -104,24 +104,24 @@ export default function HomeSection() {
             <div className="absolute top-[100px] left-[210px] flex items-center space-x-2">
               <FaLinkedinIn />
               <a
-                href={profile.urlLinkedIn}
+                href={profile?.urlLinkedIn || ''}
                 target="_blank"
                 className="text-black text-[10px] font-medium dark:text-white"
               >
-                {profile.linkedInName} {/* Display the LinkedIn name */}
+                {profile?.linkedInName || ''} {/* Display the LinkedIn name */}
               </a>
             </div>
 
             {/* Expertise Text */}
             <div className="absolute top-[23px] left-[480px] text-black text-[15px] font-semibold leading-5 dark:text-white">
-              {profile.overview} {/* Display the overview */}
+              {profile?.overview || ''} {/* Display the overview */}
             </div>
 
             {/* Introduction Header */}
             <div className="absolute top-[100px] left-[480px] text-black text-xl font-extrabold dark:text-white mt-5">
               HI, I’M
               <br />
-              {profile.linkedInName} {/* Display the LinkedIn name */}
+              {profile?.linkedInName || ''} {/* Display the LinkedIn name */}
             </div>
           </div>
 
@@ -131,22 +131,22 @@ export default function HomeSection() {
               className="relative place-self-center w-[200px] h-[250px] rounded-[20px] shadow-md object-cover"
               width={200}
               height={250}
-              src={profile.photo} // Use the fetched photo URL
-              alt="Profile"
+              src={profile?.photo || "https://via.placeholder.com/200x250"} // Use the fetched photo URL
+              alt="Profile?"
             />
             <div className="mb-4 flex flex-row gap-4 place-self-center mt-10">
               {/* Bellukchips Info */}
               <div className="flex items-center space-x-2">
                 <FaGithub />
                 <span className="text-black text-[10px] font-medium dark:text-white">
-                  {profile.githubName} {/* Display the GitHub name */}
+                  {profile?.githubName ||''} {/* Display the GitHub name */}
                 </span>
               </div>
               {/* Name and Title */}
               <div className="flex items-center space-x-2">
                 <FaLinkedinIn />
                 <span className="text-black text-[10px] w-[100px] md:w-[200px] font-medium dark:text-white">
-                  {profile.linkedInName} {/* Display the LinkedIn name */}
+                  {profile?.linkedInName || ''} {/* Display the LinkedIn name */}
                 </span>
               </div>
             </div>
@@ -155,7 +155,7 @@ export default function HomeSection() {
                 <div className="relative text-black text-xl font-extrabold dark:text-white">
                   HI, I’M
                   <br />
-                  {profile.linkedInName} {/* Display the LinkedIn name */}
+                  {profile?.linkedInName || ''} {/* Display the LinkedIn name */}
                 </div>
               </div>
               <div className="flex">
@@ -164,7 +164,7 @@ export default function HomeSection() {
               </div>
               <div className="flex">
                 <div className="relative left-5 text-black text-[15px] font-semibold leading-5 dark:text-white">
-                  {profile.overview} {/* Display the overview */}
+                  {profile?.overview || ''} {/* Display the overview */}
                 </div>
               </div>
             </div>
