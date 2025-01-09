@@ -91,7 +91,7 @@ export default function PortfolioSection() {
             </div>
             {/* Mobile Skeleton UI */}
             <div className="md:hidden">
-              <div className="w-full h-[100vh] left-0 top-[3px] absolute mt-[100px] bg-slate-700 animate-pulse"></div>
+              <div className="w-full h-[100vh] left-0 top-[3px] absolue mt-[100px] bg-slate-700 animate-pulse"></div>
               <div className="w-full h-full left-0 top-0 absolute bg-black/70 mt-[100px]"></div>
               <div className="flex flex-col">
                 <div className="w-[240px] h-[280px] top-[117px] relative place-self-center bg-slate-700 animate-pulse"></div>
@@ -220,7 +220,7 @@ export default function PortfolioSection() {
               width={862}
               height={613}
               alt="bg"
-              src={"https://via.placeholder.com/862x533"}
+              src={profile.background}
             />
             <div className="w-full h-full left-0 top-0 absolute bg-black/70 mt-[100px]"></div>
             <div className="flex flex-col">
@@ -229,7 +229,7 @@ export default function PortfolioSection() {
                 width={222}
                 alt="bg"
                 height={258}
-                src={"https://via.placeholder.com/222x258"}
+                src={profile.photo}
               />
               <div className="w-[358px] h-[174px] place-self-center top-[170px] relative flex flex-col justify-between text-white text-xs font-light font-['Montserrat']">
                 {/* Full Name */}

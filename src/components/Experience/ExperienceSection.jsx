@@ -12,12 +12,16 @@ export default function ExperienceSection() {
     try {
       setLoadingExperience(true);
       const response = await apiService.get("/experiences");
-  
+
       // Check if the response code is 200 and if 'experiences' exists and has data
-      if (response.meta.code !== 200 || !response.data.experiences || response.data.experiences.length === 0) {
+      if (
+        response.meta.code !== 200 ||
+        !response.data.experience ||
+        response.data.experience.length === 0
+      ) {
         setExperience([]);
       } else {
-        setExperience(response.data.experiences);
+        setExperience(response.data.experience);
       }
     } catch (error) {
       console.error("Error fetching experience data:", error);
@@ -25,7 +29,6 @@ export default function ExperienceSection() {
       setLoadingExperience(false);
     }
   };
-  
 
   useEffect(() => {
     fetchExperienceData();
@@ -88,8 +91,8 @@ export default function ExperienceSection() {
                 ) : (
                   // Actual experience content
                   experience.map((exp, index) => (
-                    <div key={index} className="w-[526px]">
-                      <div className="text-center text-black text-base font-extrabold font-['Montserrat'] dark:text-white">
+                    <div key={index} className="w-full">
+                      <div className="text-center w-[526px] text-black text-base font-extrabold font-['Montserrat'] dark:text-white">
                         {exp.company} ({exp.startMonth} {exp.finishMonth}
                         )
                         <br /> {exp.jobTitle}
@@ -98,8 +101,8 @@ export default function ExperienceSection() {
                       <div className="flex flex-row xl:flex-row mb-5">
                         <div className="flex w-full space-x-4">
                           <div className="w-[3px] bg-[#041d37]/50 dark:bg-[#1669BE]" />
-                          <div className="flex-1">
-                            <div className="w-[482px] left-[44px] relative text-black text-base font-normal font-['Montserrat'] text-justify dark:text-white">
+                          <div className="flex">
+                            <div className="w-full left-[44px] relative text-black text-base font-normal font-['Montserrat'] text-justify dark:text-white">
                               {exp.overview.split("\n").map((line, index) => {
                                 // Handle bold text
                                 if (line.includes("**")) {
@@ -132,7 +135,7 @@ export default function ExperienceSection() {
                                   const listItem = line.slice(1).trim();
                                   return (
                                     <div key={index}>
-                                      <ul className="list-disc">
+                                      <ul className="list-disc w-full">
                                         <li>{listItem}</li>
                                       </ul>
                                     </div>
@@ -151,7 +154,6 @@ export default function ExperienceSection() {
               </div>
             </div>
           </div>
-
           {/* Mobile UI */}
           <div className="md:hidden flex flex-col">
             <div className="place-self-center top-[72px] relative text-center text-black text-5xl font-extrabold font-['Montserrat'] dark:text-white">
