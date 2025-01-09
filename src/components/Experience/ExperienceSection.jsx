@@ -183,7 +183,7 @@ export default function ExperienceSection() {
             </div>
 
             {/* Experience Section */}
-            <div className="w-full mb-16 px-4 mt-[340px]">
+            <div className="w-full mb-16 px-4 mt-[390px]">
               <div className="w-full h-full relative flex flex-col">
                 {loadingExperience ? (
                   <div className="w-full max-w-[300px] animate-pulse mx-auto">
