@@ -141,7 +141,7 @@ export default function PortfolioSection() {
           {/* Dekstop UI */}
           <div className="hidden md:flex">
             <Image
-              className="w-full h-[613px] left-0 top-[3px] absolute"
+              className="w-full h-[613px] left-0 top-[3px] absolute object-fill"
               width={862}
               height={613}
               alt="bg"
@@ -220,7 +220,7 @@ export default function PortfolioSection() {
           {/* Mobile UI */}
           <div className="md:hidden">
             <Image
-              className="w-full h-[100vh] left-0 top-[3px] absolute mt-[100px]"
+              className="w-full h-[100vh] left-0 top-[3px] absolute mt-[100px] object-cover"
               width={862}
               height={613}
               alt="bg"
@@ -298,7 +298,7 @@ export default function PortfolioSection() {
                   </div>
                 ))}
               </div>
-              <div className="w-full h-[15px] left-0 top-[300px] relative text-justify text-white text-xs font-light font-['Montserrat']">
+              <div className="w-full h-[15px] left-0 top-[320px] relative text-center text-white text-xs font-light font-['Montserrat']">
                 {profile?.overview || ""}
               </div>
             </div>

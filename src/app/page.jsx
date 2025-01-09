@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="md:container mx-auto">
       <Navbar />
-      <section id="home" className="h-[50vh]">
+      <section id="home" className="sm:h-[80vh] md:h-[50vh]">
         <HomeSection />
       </section>
       <section id="profile" className="h-[100vh] md:h-[70vh]">
@@ -21,7 +21,7 @@ export default function Home() {
       <section id="experience" className="mx-auto">
         <ExperienceSection />
       </section>
-
+    
       <section id="skills" className="mx-auto">
         <SkillSection />
       </section>
@@ -30,7 +30,7 @@ export default function Home() {
       </section>
       <section id="contact">
         <ContactSection />
-      </section>
+      </section> 
       <Footer />
       <BottomNavbar />
     </div>

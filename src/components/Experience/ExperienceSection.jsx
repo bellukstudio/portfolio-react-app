@@ -156,12 +156,15 @@ export default function ExperienceSection() {
           </div>
           {/* Mobile UI */}
           <div className="md:hidden flex flex-col">
-            <div className="place-self-center top-[72px] relative text-center text-black text-5xl font-extrabold font-['Montserrat'] dark:text-white">
+            {/* Header */}
+            <div className="place-self-center top-[72px] relative text-center text-black text-4xl font-extrabold font-['Montserrat'] dark:text-white px-4">
               MY <br />
               EXPERIENCES
             </div>
-            <div className="w-[400px] h-[400px] top-[100px] place-self-center relative ml-28">
-              <div className="w-[400px] h-[400px] left-[-50px] top-[8px] absolute">
+
+            {/* Image Section */}
+            <div className="w-full max-w-[360px] h-auto top-[90px] mx-auto relative">
+              <div className="w-full max-w-[360px] h-auto left-[-20px] top-[8px] absolute">
                 <Image
                   className="absolute"
                   src={"/backdrop.png"}
@@ -171,7 +174,7 @@ export default function ExperienceSection() {
                 />
               </div>
               <Image
-                className="w-[300px] h-[244px] left-2 top-0 absolute"
+                className="w-[250px] h-auto top-0 left-10 absolute"
                 src={"/man-working.png"}
                 height={244}
                 width={300}
@@ -179,28 +182,28 @@ export default function ExperienceSection() {
               />
             </div>
 
-            <div className="w-full mt-40 mb-16">
+            {/* Experience Section */}
+            <div className="w-full mt-20 mb-16 px-4">
               <div className="w-full h-full relative flex flex-col">
                 {loadingExperience ? (
-                  <div className="w-[526px] animate-pulse">
+                  <div className="w-full max-w-[300px] animate-pulse mx-auto">
                     <div className="h-6 bg-gray-300 rounded w-[150px] mx-auto mb-4"></div>
                     <div className="h-4 bg-gray-300 rounded mb-5"></div>
                     <div className="h-4 bg-gray-300 rounded w-[90%] mx-auto mb-4"></div>
                   </div>
                 ) : (
                   experience.map((exp, index) => (
-                    <div key={index} className="w-[526px]">
-                      <div className="text-center text-black text-base font-extrabold font-['Montserrat'] dark:text-white">
-                        {exp.company} ({exp.startMonth} {exp.finishMonth}
-                        )
+                    <div key={index} className="w-full ">
+                      <div className="text-center text-black text-sm font-extrabold font-['Montserrat'] dark:text-white mt-[270px]">
+                        {exp.company} ({exp.startMonth} {exp.finishMonth})
                         <br /> {exp.jobTitle}
                       </div>
-                      <div className="w-[18px] h-[17px] left-[-8px] top-[-20px] relative bg-[#041d37] rounded-full dark:bg-[#1669BE]" />
-                      <div className="flex flex-row xl:flex-row mb-5">
+                      <div className="w-[14px] h-[14px] left-[-8px] top-[-20px] relative bg-[#041d37] rounded-full dark:bg-[#1669BE]" />
+                      <div className="flex flex-row mb-5">
                         <div className="flex w-full space-x-4">
                           <div className="w-[3px] bg-[#041d37]/50 dark:bg-[#1669BE]" />
                           <div className="flex-1">
-                            <div className="w-full max-w-[400px] left-[44px] relative text-black text-base font-normal font-['Montserrat'] text-justify dark:text-white">
+                            <div className="w-full max-w-[300px] left-[16px] relative text-black text-sm font-normal font-['Montserrat'] text-justify dark:text-white">
                               {exp.overview.split("\n").map((line, index) => {
                                 // Handle bold text
                                 if (line.includes("**")) {
@@ -210,7 +213,6 @@ export default function ExperienceSection() {
 
                                   return (
                                     <div key={index} className="mb-2">
-                                      <br />
                                       {parts.map((part, idx) => (
                                         <span
                                           key={idx}
@@ -221,7 +223,6 @@ export default function ExperienceSection() {
                                           {part}
                                         </span>
                                       ))}
-                                      <br />
                                     </div>
                                   );
                                 }
@@ -230,11 +231,9 @@ export default function ExperienceSection() {
                                 if (line.startsWith("-")) {
                                   const listItem = line.slice(1).trim();
                                   return (
-                                    <div key={index}>
-                                      <ul className="list-disc pl-5">
-                                        <li>{listItem}</li>
-                                      </ul>
-                                    </div>
+                                    <ul key={index} className="list-disc pl-5">
+                                      <li>{listItem}</li>
+                                    </ul>
                                   );
                                 }
 

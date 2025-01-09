@@ -150,9 +150,9 @@ export default function HomeSection() {
                 </span>
               </div>
             </div>
-            <div className="flex flex-row place-self-center mt-10">
+            <div className="flex flex-row place-self-center mt-10 p-10">
               <div className="flex">
-                <div className="relative text-black text-xl font-extrabold dark:text-white">
+                <div className="relative text-black text-xl font-extrabold dark:text-white mr-2">
                   HI, I’M
                   <br />
                   {profile?.linkedInName || ''} {/* Display the LinkedIn name */}
