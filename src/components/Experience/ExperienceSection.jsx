@@ -93,7 +93,7 @@ export default function ExperienceSection() {
                   experience.map((exp, index) => (
                     <div key={index} className="w-full">
                       <div className="text-center w-[526px] text-black text-base font-extrabold font-['Montserrat'] dark:text-white">
-                        {exp.company} ({exp.startMonth} {exp.finishMonth}
+                        {exp.company} ({exp.startMonth} / {exp.finishMonth}
                         )
                         <br /> {exp.jobTitle}
                       </div>
@@ -195,7 +195,7 @@ export default function ExperienceSection() {
                   experience.map((exp, index) => (
                     <div key={index} className="w-full ">
                       <div className="text-center text-black text-sm font-extrabold font-['Montserrat'] dark:text-white">
-                        {exp.company} ({exp.startMonth} {exp.finishMonth})
+                        {exp.company} ({exp.startMonth} / {exp.finishMonth})
                         <br /> {exp.jobTitle}
                       </div>
                       <div className="w-[14px] h-[14px] left-[-8px] top-[-20px] relative bg-[#041d37] rounded-full dark:bg-[#1669BE]" />
