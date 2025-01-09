@@ -183,7 +183,7 @@ export default function ExperienceSection() {
             </div>
 
             {/* Experience Section */}
-            <div className="w-full mt-20 mb-16 px-4">
+            <div className="w-full mb-16 px-4 mt-[340px]">
               <div className="w-full h-full relative flex flex-col">
                 {loadingExperience ? (
                   <div className="w-full max-w-[300px] animate-pulse mx-auto">
@@ -194,7 +194,7 @@ export default function ExperienceSection() {
                 ) : (
                   experience.map((exp, index) => (
                     <div key={index} className="w-full ">
-                      <div className="text-center text-black text-sm font-extrabold font-['Montserrat'] dark:text-white mt-[340px]">
+                      <div className="text-center text-black text-sm font-extrabold font-['Montserrat'] dark:text-white">
                         {exp.company} ({exp.startMonth} {exp.finishMonth})
                         <br /> {exp.jobTitle}
                       </div>
