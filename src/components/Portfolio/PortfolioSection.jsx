@@ -10,7 +10,7 @@ const PortfolioCard = ({ item }) => {
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl hover:-translate-y-2 dark:bg-[#313131]">
       <div className="relative h-48 overflow-hidden">
         <img
-          src={item.image}
+          src={item.thumbnail}
           alt={`${item.title} thumbnail`}
           className="w-full h-full object-cover"
           onError={(e) => {
@@ -26,7 +26,7 @@ const PortfolioCard = ({ item }) => {
         <p className="text-gray-600 mb-4 dark:text-white">{item.description}</p>
         <div className="flex justify-between items-center">
           <a
-            href={item.demoLink}
+            href={item.urlPortfolio}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
@@ -35,7 +35,7 @@ const PortfolioCard = ({ item }) => {
             <span>Live Demo</span>
           </a>
           <a
-            href={item.sourceLink}
+            href={item.urlGithub}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors dark:text-white"
