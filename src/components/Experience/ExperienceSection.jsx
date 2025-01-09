@@ -194,7 +194,7 @@ export default function ExperienceSection() {
                 ) : (
                   experience.map((exp, index) => (
                     <div key={index} className="w-full ">
-                      <div className="text-center text-black text-sm font-extrabold font-['Montserrat'] dark:text-white mt-[270px]">
+                      <div className="text-center text-black text-sm font-extrabold font-['Montserrat'] dark:text-white mt-[340px]">
                         {exp.company} ({exp.startMonth} {exp.finishMonth})
                         <br /> {exp.jobTitle}
                       </div>
