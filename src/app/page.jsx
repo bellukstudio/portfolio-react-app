@@ -12,17 +12,17 @@ export default function Home() {
   return (
     <div className="md:container mx-auto">
       <Navbar />
-      <section id="home" className="sm:h-[80vh] md:h-[50vh]">
+      <section id="home" className="sm:h-[100vh] md:h-[50vh]">
         <HomeSection />
       </section>
-      <section id="profile" className="h-[100vh] md:h-[70vh]">
+      <section id="profile" className="m:h-[100vh] md:h-[50vh]">
         <ProfileSection />
       </section>
-      <section id="experience" className="mx-auto mt-[100px]">
+     <section id="experience" className="mt-[100px]">
         <ExperienceSection />
       </section>
     
-      <section id="skills" className="mx-auto">
+     <section id="skills" className="mx-auto">
         <SkillSection />
       </section>
       <section id="portfolio">

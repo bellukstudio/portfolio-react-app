@@ -218,78 +218,80 @@ export default function PortfolioSection() {
             </div>
           </div>
           {/* Mobile UI */}
-          <div className="md:hidden flex flex-col">
+          <div className="md:hidden flex flex-col min-h-screen ">
+            {/* Background Image */}
             <Image
-              className="w-full h-[100vh] left-0 top-[3px] absolute mt-[100px] object-cover"
+              className="absolute inset-0 w-full h-[900px] object-cover"
               width={862}
-              height={613}
+              height={920}
               alt="bg"
               src={profile?.background || "https://via.placeholder.com/200x250"}
             />
-            <div className="w-full h-full left-0 top-0 absolute bg-black/70 mt-[100px]"></div>
-            <div className="flex flex-col">
+            {/* Backdrop */}
+            <div className="absolute h-[900px] inset-0 bg-black/70"></div>
+            {/* Content */}
+            <div className="relative flex flex-col z-10">
               <Image
-                className="w-[240px] h-[280px] top-[117px] relative place-self-center"
-                width={222}
-                alt="bg"
-                height={258}
+                className="w-[200px] h-[250px] mt-8 place-self-center"
+                width={200}
+                height={200}
+                alt="profile"
                 src={profile?.photo || "https://via.placeholder.com/200x250"}
               />
-              <div className="w-[358px] h-[174px] place-self-center top-[170px] relative flex flex-col justify-between text-white text-xs font-light font-['Montserrat']">
+              <div className="place-self-center mt-10 flex flex-col justify-between text-white text-xs font-light font-['Montserrat']">
                 {/* Full Name */}
                 <div className="flex justify-between">
                   <span className="text-right w-[100px] font-extrabold">
-                    Full Name :
+                    Full Name:
                   </span>
-                  <span className="text-left w-[200px]">
+                  <span className="text-left w-[200px] ml-2">
                     {profile?.fullname}
                   </span>
                 </div>
                 {/* Live In */}
-                <div className="flex justify-between">
+                <div className="flex justify-between mt-2">
                   <span className="text-right w-[100px] font-extrabold">
-                    Live In :
+                    Live In:
                   </span>
-                  <span className="text-left w-[200px]">
+                  <span className="text-left w-[200px] ml-2">
                     {profile?.liveIn || ""}
                   </span>
                 </div>
                 {/* Degree */}
-                <div className="flex justify-between">
+                <div className="flex justify-between mt-2">
                   <span className="text-right w-[100px] font-extrabold">
-                    Degree :
+                    Degree:
                   </span>
-                  <span className="text-left w-[200px]">
-                    {" "}
+                  <span className="text-left w-[200px] ml-2">
                     {profile?.degree || ""}
                   </span>
                 </div>
                 {/* Age */}
-                <div className="flex justify-between">
+                <div className="flex justify-between mt-2">
                   <span className="text-right w-[100px] font-extrabold">
-                    Age :
+                    Age:
                   </span>
-                  <span className="text-left w-[200px]">
+                  <span className="text-left w-[200px] ml-2">
                     {calculateAge(profile?.birthOfDay || "")}
                   </span>
                 </div>
                 {/* Availability */}
-                <div className="flex justify-between">
+                <div className="flex justify-between mt-2">
                   <span className="text-right w-[100px] font-extrabold">
-                    AVAILABLE :
+                    AVAILABLE:
                   </span>
-                  <span className="text-left w-[200px]">
+                  <span className="text-left w-[200px] ml-2">
                     {profile?.available || ""}
                   </span>
                 </div>
-              </div>
-              <div className="w-full h-[72px] right-0 mr-10 top-[200px] relative">
-                <div className="top-0 relative text-center text-white text-xs font-extrabold font-['Montserrat'] place-self-center">
+
+                {/* Education */}
+                <div className="w-full mt-10 relative text-center text-white text-xs font-extrabold font-['Montserrat']">
                   EDUCATION
                 </div>
-                {education.map((edu, index) => (
-                  <div key={edu.id} className="mt-10">
-                    <div className="top-0 mt-10 relative text-center text-white text-xs font-medium font-['Montserrat'] place-self-center">
+                {education.map((edu) => (
+                  <div key={edu.id} className="mt-4">
+                    <div className="text-center text-white text-xs font-medium font-['Montserrat']">
                       {edu.educationLevel} - {edu.fieldOfStudy} <br />
                       {edu.institution} -{" "}
                       {new Date(edu.startMonth).getFullYear()} -{" "}
@@ -297,9 +299,9 @@ export default function PortfolioSection() {
                     </div>
                   </div>
                 ))}
-              </div>
-              <div className="w-full h-[15px] left-0 top-[320px] relative text-center text-white text-xs font-light font-['Montserrat']">
-                {profile?.overview || ""}
+                <div className="w-full h-[15px] left-0 mt-20 relative text-center text-white text-xs font-light font-['Montserrat']">
+                  {profile?.overview || ""}
+                </div>
               </div>
             </div>
           </div>
