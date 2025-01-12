@@ -18,11 +18,11 @@ export default function Home() {
       <section id="profile" className="m:h-[100vh] md:h-[50vh]">
         <ProfileSection />
       </section>
-     <section id="experience" className="mt-[100px]">
+      <section id="experience" className="mt-[100px]">
         <ExperienceSection />
       </section>
-    
-     <section id="skills" className="mx-auto">
+
+      <section id="skills" className="mx-auto">
         <SkillSection />
       </section>
       <section id="portfolio">
@@ -30,7 +30,7 @@ export default function Home() {
       </section>
       <section id="contact">
         <ContactSection />
-      </section> 
+      </section>
       <Footer />
       <BottomNavbar />
     </div>
