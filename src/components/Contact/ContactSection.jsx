@@ -83,7 +83,7 @@ export default function ContactSection() {
                         id="firstName"
                         value={formData.firstName}
                         onChange={handleChange}
-                        className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-500 dark:border-gray-600"
+                        className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 bg-gray-400 dark:bg-gray-500 dark:border-gray-600"
                         required
                       />
                     </div>
@@ -101,7 +101,7 @@ export default function ContactSection() {
                         id="lastName"
                         value={formData.lastName}
                         onChange={handleChange}
-                        className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-500 dark:border-gray-600"
+                        className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500  bg-gray-400 dark:bg-gray-500 dark:border-gray-600"
                         required
                       />
                     </div>
@@ -120,7 +120,7 @@ export default function ContactSection() {
                       id="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-500 dark:border-gray-600"
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500  bg-gray-400 dark:bg-gray-500 dark:border-gray-600"
                       required
                     />
                   </div>
@@ -138,7 +138,7 @@ export default function ContactSection() {
                       id="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-500 dark:border-gray-600"
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500  bg-gray-400 dark:bg-gray-500 dark:border-gray-600"
                       required
                     />
                   </div>
@@ -156,7 +156,7 @@ export default function ContactSection() {
                       rows="4"
                       value={formData.message}
                       onChange={handleChange}
-                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-500 dark:border-gray-600"
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500  bg-gray-400 dark:bg-gray-500 dark:border-gray-600"
                       required
                     ></textarea>
                   </div>
