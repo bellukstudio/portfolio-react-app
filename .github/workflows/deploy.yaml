@@ -1,8 +1,8 @@
-name: Deploy Next.js via Docker
+name: Deploy Next.js via Git Pull
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -10,39 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Build Docker image
-      run: docker build -t nextjs-app .
-
-    - name: Save Docker image as tar
-      run: docker save nextjs-app -o nextjs-app.tar
-
-    - name: Copy Docker image to server
-      uses: appleboy/scp-action@v0.1.4
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USER }}
-        password: ${{ secrets.VPS_PASSWORD }}
-        port: 22
-        source: "nextjs-app.tar"
-        target: "/var/www/bellukstudio.my.id/nextjs-app.tar"
-
-    - name: SSH to server and run Docker
+    - name: Deploy to VPS via SSH
       uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.VPS_HOST }}
         username: ${{ secrets.VPS_USER }}
-        password: ${{ secrets.VPS_PASSWORD }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
           cd /var/www/bellukstudio.my.id
-          docker load -i nextjs-app.tar
-          docker stop nextjs-app || true
-          docker rm nextjs-app || true
-          docker run -d --name nextjs-app -p 3002:3000 nextjs-app
-          sudo systemctl reload nginx
 
-    - name: Remove Docker image tar
-      run: rm nextjs-app.tar
+          echo "📥 Pull latest changes..."
+          git pull origin main
+
+          echo "🐳 Build Docker image..."
+          docker build -t bellukstudio .
+
+          echo "🧼 Stop and remove old container..."
+          docker stop bellukstudio || true
+          docker rm bellukstudio || true
+
+          echo "🚀 Run new container..."
+          docker run -d --name bellukstudio -p 3002:3000 bellukstudio
+
+          echo "🔄 Reload Nginx..."
+          sudo systemctl reload nginx
