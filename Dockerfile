@@ -28,6 +28,7 @@ COPY --from=builder /app/next.config.mjs ./next.config.mjs
 
 # Expose port 3000
 EXPOSE 3002
-
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 # Run the Next.js app in production
 CMD ["npm", "start"]
