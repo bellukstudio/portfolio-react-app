@@ -1,12 +1,14 @@
+# Base image
 FROM --platform=$BUILDPLATFORM node:22-alpine AS base
 
+# Dependencies stage
 FROM base AS deps
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 RUN npm ci
 
-# Builder
+# Builder stage
 FROM base AS builder
 WORKDIR /app
 
@@ -17,31 +19,28 @@ ENV SKIP_ENV_VALIDATION=true
 
 RUN npm run build
 
-### Production image runner ###
+# Production runner stage
 FROM base AS runner
+WORKDIR /app
 
-# Set NODE_ENV to production
+# Set environment
 ENV NODE_ENV=production
-
-# Disable Next.js telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
-
-# Set correct permissions for nextjs user and don't run as root
-RUN addgroup nodejs
-RUN adduser -SDH nextjs
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-# Automatically leverage output traces to reduce image size
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/public ./public
-
-USER nextjs
-
-# Exposed port
-EXPOSE 3002
-ENV PORT=3002
+ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# Run the nextjs app
-CMD ["npm","run", "start"]
+# Add non-root user
+RUN addgroup nodejs && adduser -SDH nextjs
+USER nextjs
+
+# Copy required files for production
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/ ./.next/
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
+
+# Expose port
+EXPOSE 3000
+
+# Start the app
+CMD ["npm", "run", "start"]
