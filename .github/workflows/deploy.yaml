@@ -30,8 +30,8 @@ jobs:
           docker build -t bellukstudio .
 
           echo "🧼 Stop and remove old container..."
-          docker stop bellukstudio || true
-          docker rm bellukstudio || true
+          docker stop bellukstudio 
+          docker rm bellukstudio
 
           echo "🚀 Run new container..."
           docker run -d --name bellukstudio -p 3002:3000 bellukstudio
