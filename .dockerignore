@@ -1,20 +1,7 @@
-.git
-node_modules
-.gitignore
-*.txt
-
-*.md
-dist
-.cache
-build
-.next
-
-
-
 Dockerfile
 .dockerignore
+node_modules
 npm-debug.log
-
-# Log files
-logs
-*.log
+README.md
+.next
+.git
