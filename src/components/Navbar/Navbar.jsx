@@ -90,7 +90,7 @@ export default function Navbar() {
                   className="py-2 px-4 rounded-full border-s-2 md:border-s-0 md:border-b-2 border-transparent font-medium text-neutral-200 focus:outline-none  dark:text-neutral-200 bg-black "
                   aria-current="page"
                 >
-                  Contact
+                  Contacts
                 </a>
               ) : (
                 <a

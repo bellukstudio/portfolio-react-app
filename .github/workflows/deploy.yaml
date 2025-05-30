@@ -34,7 +34,5 @@ jobs:
           docker rm bellukstudio || true
 
           echo "🚀 Run new container..."
-          docker run -d --name bellukstudio -p 3002:3000 bellukstudio
-
-          echo "🔄 Reload Nginx..."
-          sudo systemctl reload nginx
+          docker run -d --restart=always --name bellukstudio -p 3002:3000 bellukstudio
+          
