@@ -34,5 +34,5 @@ jobs:
           docker rm bellukstudio || true
 
           echo "🚀 Run new container..."
-          docker run -d --restart=always --name bellukstudio -p 3002:3000 bellukstudio
+          docker run -d --name bellukstudio -p 3002:3000 bellukstudio
           
