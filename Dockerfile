@@ -1,47 +1,47 @@
-# Stage 1: Build the Next.js app
-FROM node:18-alpine AS builder
+FROM --platform=$BUILDPLATFORM node:22-alpine AS base
 
-# Set working directory
+FROM base AS deps
 WORKDIR /app
 
-# Copy package files and install dependencies
-COPY package.json package-lock.json* ./
-RUN npm install
+COPY package.json package-lock.json ./
+RUN npm ci
 
-# Copy all source files
+# Builder
+FROM base AS builder
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build the Next.js app
+ENV SKIP_ENV_VALIDATION=true
+
 RUN npm run build
 
-# Stage 2: Production-ready image
-FROM node:18-alpine AS runner
+### Production image runner ###
+FROM base AS runner
 
-# Create a new group and user for security
-RUN addgroup -g 1001 nodejs && \
-    adduser -u 1001 -G nodejs -s /bin/sh -D nextjs
+# Set NODE_ENV to production
+ENV NODE_ENV=production
 
-# Set working directory
-WORKDIR /app
+# Disable Next.js telemetry
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# Copy only necessary files from builder
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/package-lock.json* ./
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/next.config.mjs ./next.config.mjs
+# Set correct permissions for nextjs user and don't run as root
+RUN addgroup nodejs
+RUN adduser -SDH nextjs
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
 
-# Set permissions
-RUN chown -R nextjs:nodejs /app
+# Automatically leverage output traces to reduce image size
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 
-# Switch to non-root user
 USER nextjs
 
-# Expose port
+# Exposed port
 EXPOSE 3002
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# Start the app
-CMD ["npm", "start"]
+# Run the nextjs app
+CMD ["node", "start"]
