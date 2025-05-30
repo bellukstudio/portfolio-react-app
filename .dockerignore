@@ -9,7 +9,7 @@ dist
 build
 .next
 
-.env*
+
 
 Dockerfile
 .dockerignore
