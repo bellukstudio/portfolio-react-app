@@ -1,4 +1,4 @@
-name: Deploy Next.js via Git Pull
+name: Deploy Next.js
 
 on:
   push:
@@ -27,13 +27,13 @@ jobs:
           git pull origin main
 
           echo "🐳 Build Docker image..."
-          docker build -t bellukstudio .
+          docker build --build-arg NEXT_PUBLIC_API_BASE_URL=https://myapi-app.bellukstudio.my.id/ -t bellukstudio .
 
           echo "🧼 Stop and remove old container..."
           docker stop bellukstudio || true
           docker rm bellukstudio || true
 
           echo "🚀 Run new container..."
-          docker run -d --name bellukstudio -p 3002:3000 bellukstudio
+          docker run -d --name bellukstudio -p 3000:3000 bellukstudio
 
           

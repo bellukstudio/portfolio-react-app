@@ -12,6 +12,10 @@ RUN npm ci
 FROM base AS builder
 WORKDIR /app
 
+# Set environment variable here so it exists during build
+ARG NEXT_PUBLIC_API_BASE_URL
+ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -28,6 +32,10 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
+
+# Pass env again in runner for runtime
+ARG NEXT_PUBLIC_API_BASE_URL
+ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
 
 # Add non-root user
 RUN addgroup nodejs && adduser -SDH nextjs
