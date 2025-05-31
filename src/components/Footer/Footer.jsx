@@ -22,6 +22,12 @@ export default function Footer() {
               Copyright © {currentYear} All Rights Reserved.
             </p>
           </div>
+
+          <div className="mt-1">
+            <p className="text-sm text-gray-400 dark:text-neutral-600">
+              Powered by Docker, Nginx, Next.js, Tailwind CSS, and VPS
+            </p>
+          </div>
         </div>
       </footer>
     </div>
