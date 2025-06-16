@@ -52,6 +52,17 @@ jobs:
         script: |
           cd /home/bellukstudio/projects/bellukstudio.my.id
           echo "🐳 Build Docker image..."
+          # Debug current state
+          echo "Current user: $(whoami)"
+          echo "Directory owner: $(ls -la . | head -2)"
+          echo "Git directory owner: $(ls -la .git/ | head -2)"
+
+          # Add safe directory untuk Git
+          git config --global --add safe.directory /home/bellukstudio/projects/bellukstudio.my.id
+          git config --global --add safe.directory '*'
+
+          # Fix ownership issues
+          sudo chown -R $(whoami):$(whoami) . || true
           docker build -t bellukstudio .
 
   # Job 3: Stop old container
