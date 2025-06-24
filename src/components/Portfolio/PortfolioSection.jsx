@@ -69,7 +69,7 @@ export default function PortfolioSection() {
     try {
       setLoadingPortfolio(true);
 
-      const response = await apiService.get("/portfolio");
+      const response = await apiService.get("/portfolio/allportfolio");
       if (
         response.meta.code !== 200 ||
         !response.data.portfolio ||

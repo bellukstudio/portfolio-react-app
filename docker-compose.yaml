@@ -1,0 +1,15 @@
+services:
+  bellukstudio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bellukstudio
+    restart: always
+    ports:
+      - 3002:3002
+    networks:
+      - bellukstudio_network
+
+networks:
+  bellukstudio_network:
+    external: true      
